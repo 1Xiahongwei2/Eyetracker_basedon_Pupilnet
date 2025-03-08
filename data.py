@@ -1,7 +1,7 @@
 import os
 
 from torch.utils.data import Dataset
-from torchlearn.baseope.webbuild.eyenet.utils import *
+from torchlearn.baseope.webbuild.segment.utils import *
 from torchvision import transforms
 transform=transforms.Compose([
     transforms.ToTensor()
@@ -18,8 +18,8 @@ class MyDataset(Dataset):
     def __getitem__(self, index):
         segment_name=self.name[index]  #xx.png
         segment_path=os.path.join(self.path,'SegmentationClass',segment_name)
-        # image_path=os.path.join(self.path,'JPEGImages',segment_name.replace('png','jpg'))
-        image_path=os.path.join(self.path,'JPEGImages',segment_name.replace('jpg','png'))
+        image_path=os.path.join(self.path,'JPEGImages',segment_name.replace('png','jpg'))
+        # image_path=os.path.join(self.path,'JPEGImages',segment_name.replace('jpg','png'))
         segment_image=keep_image_size_open(segment_path)
         image=keep_image_size_open(image_path)
         return transform(image),transform(segment_image)
